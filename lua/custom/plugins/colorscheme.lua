@@ -1,6 +1,6 @@
 vim.defer_fn(function()
-  vim.cmd.colorscheme 'dawnfox'
-  vim.o.background = 'light'
+  vim.cmd.colorscheme 'vscode'
+  vim.o.background = 'dark'
 end, 0)
 
 return {
@@ -13,4 +13,5 @@ return {
   'nordtheme/vim',
   'EdenEast/nightfox.nvim',
   'Mofiqul/vscode.nvim',
+  'dgraham/xcode-low-key-vim',
 }
