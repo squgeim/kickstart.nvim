@@ -1,7 +1,7 @@
 vim.defer_fn(function()
-  vim.cmd.colorscheme 'vscode'
   vim.o.background = 'dark'
 end, 0)
+
 
 return {
   'morhetz/gruvbox',
@@ -14,4 +14,13 @@ return {
   'EdenEast/nightfox.nvim',
   'Mofiqul/vscode.nvim',
   'dgraham/xcode-low-key-vim',
+  'sainnhe/sonokai',
+  'miikanissi/modus-themes.nvim',
+  {
+      "lalitmee/cobalt2.nvim",
+      dependencies = { "tjdevries/colorbuddy.nvim", tag = "v1.0.0" },
+      init = function()
+          require("colorbuddy").colorscheme("cobalt2")
+      end,
+  },
 }

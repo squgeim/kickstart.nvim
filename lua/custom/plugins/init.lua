@@ -2,6 +2,28 @@
 --  I promise not to create any merge conflicts in this directory :)
 --
 -- See the kickstart.nvim README for more information
+require('telescope').setup {
+  defaults = {
+    path_display = { "truncate" },
+    dynamic_preview_title = true,
+  }
+}
+
+vim.keymap.set('n', '<leader>p', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' })
+vim.opt.colorcolumn = "100"
+vim.opt.list = true
+
+require('lspconfig').pyright.setup {
+  settings = {
+    python = {
+      analysis = {
+        typeCheckingMode = 'basic'
+      },
+    }
+  }
+}
+
+
 return {
   {
     'tomasky/bookmarks.nvim',
@@ -32,5 +54,24 @@ return {
 
       require('telescope').load_extension('bookmarks')
     end
-  }
+  },
+  {
+    "kdheepak/lazygit.nvim",
+    cmd = {
+      "LazyGit",
+      "LazyGitConfig",
+      "LazyGitCurrentFile",
+      "LazyGitFilter",
+      "LazyGitFilterCurrentFile",
+    },
+    -- optional for floating window border decoration
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+    },
+    -- setting the keybinding for LazyGit with 'keys' is recommended in
+    -- order to load the plugin when the command is run for the first time
+    keys = {
+      { "<leader>gg", "<cmd>LazyGit<cr>", desc = "LazyGit" }
+    }
+  },
 }
