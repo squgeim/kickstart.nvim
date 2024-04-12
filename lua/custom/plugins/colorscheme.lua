@@ -2,7 +2,6 @@ vim.defer_fn(function()
   vim.o.background = 'dark'
 end, 0)
 
-
 return {
   'morhetz/gruvbox',
   'nlknguyen/papercolor-theme',
@@ -17,10 +16,10 @@ return {
   'sainnhe/sonokai',
   'miikanissi/modus-themes.nvim',
   {
-      "lalitmee/cobalt2.nvim",
-      dependencies = { "tjdevries/colorbuddy.nvim", tag = "v1.0.0" },
-      init = function()
-          require("colorbuddy").colorscheme("cobalt2")
-      end,
+    'lalitmee/cobalt2.nvim',
+    dependencies = { 'tjdevries/colorbuddy.nvim', tag = 'v1.0.0' },
+    init = function()
+      -- require("colorbuddy").colorscheme("cobalt2")
+    end,
   },
 }
