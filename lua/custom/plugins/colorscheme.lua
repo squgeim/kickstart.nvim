@@ -1,5 +1,6 @@
 vim.defer_fn(function()
   vim.o.background = 'dark'
+  vim.cmd.colorscheme 'tokyonight-moon'
 end, 0)
 
 return {

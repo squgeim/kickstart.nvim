@@ -26,8 +26,8 @@ vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
 vim.keymap.set('n', 'f', 'za')
 vim.keymap.set('n', 'F', 'zA')
 
--- Enable Python lint
-require('lint').linters_by_ft['python'] = { 'pflake8' }
+-- Use better tab character
+vim.opt.listchars = { tab = '⏐ ', trail = '·', nbsp = '␣' }
 
 require('lspconfig').pyright.setup {
   settings = {
@@ -40,6 +40,7 @@ require('lspconfig').pyright.setup {
 }
 
 return {
+  'norcalli/nvim-colorizer.lua',
   'tpope/vim-fugitive',
   {
     'tomasky/bookmarks.nvim',
