@@ -28,16 +28,36 @@ vim.keymap.set('n', 'F', 'zA')
 
 -- Use better tab character
 vim.opt.listchars = { tab = '⏐ ', trail = '·', nbsp = '␣' }
+-- vim.opt.listchars = { tab = '⁞ ', trail = '·', nbsp = '␣' }
 
-require('lspconfig').pyright.setup {
-  settings = {
-    python = {
-      analysis = {
-        typeCheckingMode = 'basic',
-      },
-    },
-  },
-}
+-- require('lspconfig').pyright.setup {
+--   settings = {
+--     python = {
+--       analysis = {
+--         typeCheckingMode = 'basic',
+--       },
+--     },
+--   },
+-- }
+
+vim.defer_fn(function()
+  require('lspconfig').pylsp.setup({
+    on_attach = on_attach,
+    capabilities = capabilities,
+    settings = {
+      pylsp = {
+        plugins = {
+          mccabe = { enabled = false },
+          flake8 = { enabled = true },
+          pylint = { enabled = false },
+          pyflakes = { enabled = false },
+          pycodestyle = { enabled = false },
+          autopip8 = { enabled = true },
+        }
+      }
+    }
+  })
+end, 0)
 
 return {
   'norcalli/nvim-colorizer.lua',
@@ -91,4 +111,5 @@ return {
       { '<leader>gg', '<cmd>LazyGit<cr>', desc = 'LazyGit' },
     },
   },
+  'smithbm2316/centerpad.nvim'
 }
