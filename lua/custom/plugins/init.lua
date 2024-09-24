@@ -18,7 +18,9 @@ vim.opt.colorcolumn = '100'
 vim.g.have_nerd_font = true
 
 -- Do not copy yank to OS Clipboard
-vim.opt.clipboard = ''
+vim.defer_fn(function()
+  vim.opt.clipboard = ''
+end, 1000)
 
 -- Fold everything after opening file
 vim.opt.foldmethod = 'expr'
@@ -30,18 +32,8 @@ vim.keymap.set('n', 'F', 'zA')
 vim.opt.listchars = { tab = '⏐ ', trail = '·', nbsp = '␣' }
 -- vim.opt.listchars = { tab = '⁞ ', trail = '·', nbsp = '␣' }
 
--- require('lspconfig').pyright.setup {
---   settings = {
---     python = {
---       analysis = {
---         typeCheckingMode = 'basic',
---       },
---     },
---   },
--- }
-
 vim.defer_fn(function()
-  require('lspconfig').pylsp.setup({
+  require('lspconfig').pylsp.setup {
     on_attach = on_attach,
     capabilities = capabilities,
     settings = {
@@ -53,10 +45,14 @@ vim.defer_fn(function()
           pyflakes = { enabled = false },
           pycodestyle = { enabled = false },
           autopip8 = { enabled = true },
-        }
-      }
-    }
-  })
+        },
+      },
+    },
+  }
+
+  require('conform').setup {
+    format_on_save = nil,
+  }
 end, 0)
 
 return {
@@ -111,5 +107,15 @@ return {
       { '<leader>gg', '<cmd>LazyGit<cr>', desc = 'LazyGit' },
     },
   },
-  'smithbm2316/centerpad.nvim'
+  'smithbm2316/centerpad.nvim',
+  {
+    'toppair/peek.nvim',
+    event = { 'VeryLazy' },
+    build = 'deno task --quiet build:fast',
+    config = function()
+      require('peek').setup()
+      vim.api.nvim_create_user_command('PeekOpen', require('peek').open, {})
+      vim.api.nvim_create_user_command('PeekClose', require('peek').close, {})
+    end,
+  },
 }
