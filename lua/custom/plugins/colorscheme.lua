@@ -1,7 +1,40 @@
+vim.o.termguicolors = true
+
 vim.defer_fn(function()
-  vim.o.termguicolors = true
-  vim.o.background = 'dark'
-  -- vim.cmd.colorscheme 'modus'
+  local ok_status, NeoSolarized = pcall(require, "NeoSolarized")
+
+  if not ok_status then
+    return
+  end
+
+  -- Default Setting for NeoSolarized
+
+  NeoSolarized.setup {
+    style = "light", -- "dark" or "light"
+    transparent = false, -- true/false; Enable this to disable setting the background color
+    styles = {
+      -- Style to be applied to different syntax groups
+      comments = { italic = true },
+      keywords = { italic = true },
+      functions = { bold = false },
+      variables = {},
+      string = { italic = false },
+      underline = true, -- true/false; for global underline
+      undercurl = true, -- true/false; for global undercurl
+    },
+    -- Add specific hightlight groups
+    on_highlights = function(highlights, colors)
+      -- highlights.Include.fg = colors.red -- Using `red` foreground for Includes
+    end,
+  }
+
+  -- Set colorscheme to NeoSolarized
+  vim.cmd.colorscheme 'NeoSolarized'
+  vim.o.background = 'light'
+end, 0)
+
+vim.defer_fn(function()
+  -- vim.o.background = 'light'
   -- vim.cmd.colorscheme 'tokyonight'
   -- vim.cmd.colorscheme 'vscode'
   -- vim.cmd.colorscheme 'dawnfox'
@@ -9,7 +42,7 @@ vim.defer_fn(function()
   -- vim.cmd.colorscheme 'github_light_tritanopia'
   -- vim.cmd.colorscheme 'modus'
   -- vim.cmd.colorscheme 'rose-pine'
-  vim.cmd.colorscheme 'adwaita'
+  -- vim.cmd.colorscheme 'adwaita'
   -- vim.cmd.colorscheme 'sorbet'
 end, 0)
 
@@ -38,4 +71,5 @@ return {
   'daschw/leaf.nvim',
   'cdmill/neomodern.nvim',
   'e-q/okcolors.nvim',
+  'Tsuzat/NeoSolarized.nvim'
 }

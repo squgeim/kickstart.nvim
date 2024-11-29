@@ -33,6 +33,15 @@ vim.opt.listchars = { tab = '⏐ ', trail = '·', nbsp = '␣' }
 -- vim.opt.listchars = { tab = '⁞ ', trail = '·', nbsp = '␣' }
 
 vim.defer_fn(function()
+  local servers = {
+    pylsp = {},
+    docker_compose_language_service = {},
+    eslint = {},
+    tsp_server = {},
+  }
+  local ensure_installed = vim.tbl_keys(servers or {})
+  require('mason-tool-installer').setup { ensure_installed = ensure_installed }
+
   require('lspconfig').pylsp.setup {
     on_attach = on_attach,
     capabilities = capabilities,
