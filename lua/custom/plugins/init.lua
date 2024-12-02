@@ -37,7 +37,7 @@ vim.defer_fn(function()
     pylsp = {},
     docker_compose_language_service = {},
     eslint = {},
-    tsp_server = {},
+    ts_ls = {},
   }
   local ensure_installed = vim.tbl_keys(servers or {})
   require('mason-tool-installer').setup { ensure_installed = ensure_installed }
