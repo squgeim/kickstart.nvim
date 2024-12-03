@@ -1,4 +1,5 @@
 vim.o.termguicolors = true
+vim.o.background = 'light'
 
 vim.defer_fn(function()
   local ok_status, NeoSolarized = pcall(require, "NeoSolarized")
@@ -29,12 +30,11 @@ vim.defer_fn(function()
   }
 
   -- Set colorscheme to NeoSolarized
-  vim.cmd.colorscheme 'NeoSolarized'
-  vim.o.background = 'light'
+  -- vim.cmd.colorscheme 'NeoSolarized'
 end, 0)
 
 vim.defer_fn(function()
-  -- vim.o.background = 'light'
+  vim.cmd.colorscheme 'coffeecat'
   -- vim.cmd.colorscheme 'tokyonight'
   -- vim.cmd.colorscheme 'vscode'
   -- vim.cmd.colorscheme 'dawnfox'

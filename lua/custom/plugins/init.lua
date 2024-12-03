@@ -37,7 +37,8 @@ vim.defer_fn(function()
     pylsp = {},
     docker_compose_language_service = {},
     eslint = {},
-    ts_ls = {},
+    markdownlint = {},
+    prettierd = {},
   }
   local ensure_installed = vim.tbl_keys(servers or {})
   require('mason-tool-installer').setup { ensure_installed = ensure_installed }
@@ -124,5 +125,10 @@ return {
       { "<c-l>", "<cmd><C-U>TmuxNavigateRight<cr>" },
       { "<c-\\>", "<cmd><C-U>TmuxNavigatePrevious<cr>" },
     },
+    {
+      "pmizio/typescript-tools.nvim",
+      dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+      opts = {},
+    }
   },
 }
