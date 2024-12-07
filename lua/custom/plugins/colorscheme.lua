@@ -45,7 +45,8 @@ vim.defer_fn(function()
   -- vim.cmd.colorscheme 'adwaita'
   -- vim.cmd.colorscheme 'sorbet'
   -- vim.cmd.colorscheme 'iceclimber'
-  vim.cmd.colorscheme 'darkforest'
+  -- vim.cmd.colorscheme 'darkforest'
+  vim.cmd.colorscheme 'solarized'
 end, 0)
 
 return {
