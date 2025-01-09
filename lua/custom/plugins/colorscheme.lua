@@ -2,7 +2,7 @@ vim.o.termguicolors = true
 vim.o.background = 'dark'
 
 vim.defer_fn(function()
-  local ok_status, NeoSolarized = pcall(require, "NeoSolarized")
+  local ok_status, NeoSolarized = pcall(require, 'NeoSolarized')
 
   if not ok_status then
     return
@@ -11,12 +11,12 @@ vim.defer_fn(function()
   -- Default Setting for NeoSolarized
 
   NeoSolarized.setup {
-    style = "light", -- "dark" or "light"
+    style = 'dark', -- "dark" or "light"
     transparent = false, -- true/false; Enable this to disable setting the background color
     styles = {
       -- Style to be applied to different syntax groups
-      comments = { italic = true },
-      keywords = { italic = true },
+      comments = { italic = false },
+      keywords = { italic = false },
       functions = { bold = false },
       variables = {},
       string = { italic = false },
@@ -34,6 +34,21 @@ vim.defer_fn(function()
 end, 0)
 
 vim.defer_fn(function()
+  require('rose-pine').setup {
+    variant = 'auto', -- auto, main, moon, or dawn
+    dark_variant = 'moon', -- main, moon, or dawn
+
+    styles = {
+      bold = true,
+      italic = false,
+      transparency = false,
+    },
+  }
+
+  vim.cmd.colorscheme 'rose-pine'
+end, 0)
+
+vim.defer_fn(function()
   -- vim.cmd.colorscheme 'coffeecat'
   -- vim.cmd.colorscheme 'tokyonight'
   -- vim.cmd.colorscheme 'vscode'
@@ -46,7 +61,9 @@ vim.defer_fn(function()
   -- vim.cmd.colorscheme 'sorbet'
   -- vim.cmd.colorscheme 'iceclimber'
   -- vim.cmd.colorscheme 'darkforest'
-  vim.cmd.colorscheme 'solarized'
+  -- vim.cmd.colorscheme 'solarized'
+  -- vim.cmd.colorscheme 'papercolor'
+  -- vim.cmd.colorscheme 'OceanicNext'
 end, 0)
 
 return {
@@ -74,5 +91,8 @@ return {
   'daschw/leaf.nvim',
   'cdmill/neomodern.nvim',
   'e-q/okcolors.nvim',
-  'Tsuzat/NeoSolarized.nvim'
+  'Tsuzat/NeoSolarized.nvim',
+  { 'catppuccin/nvim', name = 'catppuccin' },
+  'tanvirtin/monokai.nvim',
+  'mhartington/oceanic-next',
 }
