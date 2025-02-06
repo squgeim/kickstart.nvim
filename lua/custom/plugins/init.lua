@@ -32,6 +32,7 @@ vim.keymap.set('n', 'F', 'zA')
 vim.opt.listchars = { tab = '⏐ ', trail = '·', nbsp = '␣' }
 -- vim.opt.listchars = { tab = '⁞ ', trail = '·', nbsp = '␣' }
 
+-- mason/lsp stuff
 vim.defer_fn(function()
   local servers = {
     pylsp = {},
@@ -65,13 +66,14 @@ vim.defer_fn(function()
   }
 end, 0)
 
+-- mini.nvim
 vim.defer_fn(function()
-  require('mini.files').setup({
+  require('mini.files').setup {
     windows = {
       preview = true,
       width_preview = 100,
-    }
-  })
+    },
+  }
   require('mini.hipatterns').setup()
   require('mini.icons').setup()
   require('mini.bufremove').setup()
@@ -83,14 +85,14 @@ vim.defer_fn(function()
 
   vim.keymap.set('n', '\\', function()
     require('mini.files').open(vim.api.nvim_buf_get_name(0))
-  end, { desc = "Show mini.files"})
+  end, { desc = 'Show mini.files' })
 
   vim.keymap.set('n', 'sl', function()
     local home = vim.fn.expand '~'
     local cwd = vim.fn.getcwd():gsub('^' .. home, ''):gsub('/', '∕')
 
     require('mini.sessions').read(cwd)
-  end, { desc = "[S]ession [l]oad"})
+  end, { desc = '[S]ession [l]oad' })
   vim.keymap.set('n', 'ss', function()
     local home = vim.fn.expand '~'
     local cwd = vim.fn.getcwd():gsub('^' .. home, ''):gsub('/', '∕')
@@ -103,6 +105,10 @@ vim.defer_fn(function()
   vim.keymap.set('n', 'sd', function()
     require('mini.sessions').select('delete', { force = true })
   end, { desc = '[S]ession [D]elete' })
+end, 0)
+
+vim.defer_fn(function()
+  vim.cmd 'Copilot disable'
 end, 0)
 
 return {
