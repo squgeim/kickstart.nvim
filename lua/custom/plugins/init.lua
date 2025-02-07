@@ -107,10 +107,6 @@ vim.defer_fn(function()
   end, { desc = '[S]ession [D]elete' })
 end, 0)
 
-vim.defer_fn(function()
-  vim.cmd 'Copilot disable'
-end, 0)
-
 return {
   'norcalli/nvim-colorizer.lua',
   'tpope/vim-fugitive',
