@@ -173,5 +173,4 @@ return {
       opts = {},
     },
   },
-  'github/copilot.vim',
 }
