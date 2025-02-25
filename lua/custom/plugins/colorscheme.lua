@@ -41,7 +41,7 @@ return {
     'lalitmee/cobalt2.nvim',
     dependencies = { 'tjdevries/colorbuddy.nvim', tag = 'v1.0.0' },
     init = function()
-      -- require('colorbuddy').colorscheme 'cobalt2'
+      require('colorbuddy').colorscheme 'cobalt2'
     end,
   },
   { 'projekt0n/github-nvim-theme', name = 'github-theme' },
@@ -83,7 +83,7 @@ return {
           undercurl = true, -- true/false; for global undercurl
         },
       }
-      vim.cmd.colorscheme 'NeoSolarized'
+      -- vim.cmd.colorscheme 'NeoSolarized'
     end,
   },
   {
