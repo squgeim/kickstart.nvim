@@ -5,14 +5,22 @@
 
 require('telescope').setup {
   defaults = {
+    layout_strategy = 'horizontal',
+    layout_config = {
+      prompt_position = 'top',
+    },
+    sorting_strategy='ascending',
     path_display = { 'truncate' },
     dynamic_preview_title = true,
   },
 }
 
-vim.keymap.set('n', '<leader>p', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' })
-vim.keymap.set('n', '<leader>o', require('telescope.builtin').lsp_document_symbols, { desc = '[D]ocument [S]ymbols' })
-
+vim.defer_fn(function()
+  -- vim.keymap.set('n', '<leader>p', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' })
+  vim.keymap.set('n', '<leader>p', require('snacks').picker.files, { desc = '[S]earch [F]iles' })
+  vim.keymap.set('n', '<leader>o', require('snacks').picker.lsp_symbols, { desc = '[D]ocument [S]ymbols' })
+  vim.keymap.set('n', '<leader>sc', require('snacks').picker.colorschemes, { desc = '[C]olorschems' })
+end, 0)
 -- vim.opt.relativenumber = true
 vim.opt.colorcolumn = '100'
 vim.g.have_nerd_font = true
@@ -25,12 +33,30 @@ end, 1000)
 -- Fold everything after opening file
 vim.opt.foldmethod = 'expr'
 vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
-vim.keymap.set('n', 'f', 'za')
-vim.keymap.set('n', 'F', 'zA')
+vim.keymap.set('n', '-', 'za')
+vim.keymap.set('n', '_', 'zA')
 
 -- Use better tab character
 vim.opt.listchars = { tab = '⏐ ', trail = '·', nbsp = '␣' }
 -- vim.opt.listchars = { tab = '⁞ ', trail = '·', nbsp = '␣' }
+
+-- Set relative number in normal mode and absolute number in insert mode
+vim.api.nvim_create_autocmd({ 'InsertEnter' }, {
+  pattern = '*',
+  callback = function()
+    vim.opt.relativenumber = false
+  end,
+})
+vim.api.nvim_create_autocmd({ 'InsertLeave' }, {
+  pattern = '*',
+  callback = function()
+    vim.opt.relativenumber = true
+  end,
+})
+
+-- Enable relative number by default
+vim.opt.number = true
+vim.opt.relativenumber = true
 
 -- mason/lsp stuff
 vim.defer_fn(function()
@@ -78,7 +104,7 @@ vim.defer_fn(function()
   require('mini.icons').setup()
   require('mini.bufremove').setup()
   require('mini.indentscope').setup()
-  require('mini.jump2d').setup()
+  require('mini.jump').setup()
   require('mini.move').setup()
   require('mini.bracketed').setup()
   require('mini.sessions').setup()
@@ -105,6 +131,15 @@ vim.defer_fn(function()
   vim.keymap.set('n', 'sd', function()
     require('mini.sessions').select('delete', { force = true })
   end, { desc = '[S]ession [D]elete' })
+end, 0)
+
+-- neo-tree
+vim.defer_fn(function()
+  require('neo-tree').setup {
+    window = {
+      position = 'right',
+    },
+  }
 end, 0)
 
 return {
@@ -174,15 +209,15 @@ return {
     },
   },
   {
-    "folke/noice.nvim",
-    event = "VeryLazy",
+    'folke/noice.nvim',
+    event = 'VeryLazy',
     opts = {
       lsp = {
         -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
         override = {
-          ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-          ["vim.lsp.util.stylize_markdown"] = true,
-          ["cmp.entry.get_documentation"] = true, -- requires hrsh7th/nvim-cmp
+          ['vim.lsp.util.convert_input_to_markdown_lines'] = true,
+          ['vim.lsp.util.stylize_markdown'] = true,
+          ['cmp.entry.get_documentation'] = true, -- requires hrsh7th/nvim-cmp
         },
       },
       -- you can enable a preset for easier configuration
@@ -196,11 +231,11 @@ return {
     },
     dependencies = {
       -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
-      "MunifTanjim/nui.nvim",
+      'MunifTanjim/nui.nvim',
       -- OPTIONAL:
       --   `nvim-notify` is only needed, if you want to use the notification view.
       --   If not available, we use `mini` as the fallback
       -- "rcarriga/nvim-notify",
-      }
-  }
+    },
+  },
 }

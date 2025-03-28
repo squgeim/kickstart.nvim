@@ -1,73 +1,58 @@
 return {
   'github/copilot.vim',
   {
-    'MeanderingProgrammer/render-markdown.nvim',
-    dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.nvim' }, -- if you use the mini.nvim suite
-    ---@module 'render-markdown'
-    ---@type render.md.UserConfig
+    'yetone/avante.nvim',
+    event = 'VeryLazy',
+    version = false, -- Never set this value to "*"! Never!
     opts = {
-      file_types = { 'markdown', 'copilot-chat' },
+      -- add any opts here
+      -- for example
+      provider = 'copilot',
+      auto_suggestions_provider = 'copilot',
+      behaviour = {
+        auto_suggestions = false,
+      },
     },
-  },
-  {
-    "CopilotC-Nvim/CopilotChat.nvim",
+    -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
+    build = 'make',
+    -- build = "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false" -- for windows
     dependencies = {
-      { "github/copilot.vim" }, -- or zbirenbaum/copilot.lua
-      { "nvim-lua/plenary.nvim", branch = "master" }, -- for curl, log and async functions
+      'nvim-treesitter/nvim-treesitter',
+      'stevearc/dressing.nvim',
+      'nvim-lua/plenary.nvim',
+      'MunifTanjim/nui.nvim',
+      --- The below dependencies are optional,
+      'echasnovski/mini.pick', -- for file_selector provider mini.pick
+      'nvim-telescope/telescope.nvim', -- for file_selector provider telescope
+      'hrsh7th/nvim-cmp', -- autocompletion for avante commands and mentions
+      'ibhagwan/fzf-lua', -- for file_selector provider fzf
+      'nvim-tree/nvim-web-devicons', -- or echasnovski/mini.icons
+      'zbirenbaum/copilot.lua', -- for providers='copilot'
+      {
+        -- support for image pasting
+        'HakonHarnes/img-clip.nvim',
+        event = 'VeryLazy',
+        opts = {
+          -- recommended settings
+          default = {
+            embed_image_as_base64 = false,
+            prompt_for_file_name = false,
+            drag_and_drop = {
+              insert_mode = true,
+            },
+            -- required for Windows users
+            use_absolute_path = true,
+          },
+        },
+      },
+      {
+        -- Make sure to set this up properly if you have lazy=true
+        'MeanderingProgrammer/render-markdown.nvim',
+        opts = {
+          file_types = { 'markdown', 'Avante' },
+        },
+        ft = { 'markdown', 'Avante' },
+      },
     },
-    build = "make tiktoken && brew install lynx", -- Only on MacOS or Linux
-    opts = {
-      -- See Configuration section for options
-
-      chat_autocomplete = false,
-      highlight_headers = false,
-      separator = '---',
-      error_header = '> [!ERROR] Error',
-      insert_at_end = true
-    },
-    -- See Commands section for default commands if you want to lazy load on them
-    keys = {
-      {
-        '<leader>cq',
-        function()
-          local input = vim.fn.input("Quick Chat: ")
-          if input ~= "" then
-            require("CopilotChat").ask(input, {
-              window = {
-                layout = "float",
-                relative = "cursor",
-                width = 1,
-                height = 0.4,
-                row = 1
-              },
-            })
-          end
-        end,
-        desc = "CopilotChat - Quick chat",
-        mode = { "n", "v" },
-      },
-      {
-        '<leader>cc',
-        function()
-          require("CopilotChat").toggle()
-        end,
-        desc = "CopilotChat - Open chat",
-        mode = { "n", "v" },
-      },
-      {
-        "<leader>cs",
-        function()
-          local input = vim.fn.input("Perplexity: ")
-          if input ~= "" then
-            require("CopilotChat").ask(input, {
-              agent = "perplexityai",
-              selection = false,
-            })
-          end
-        end,
-        desc = "CopilotChat - Perplexity Search",
-        mode = { "n" },
-      },
-    }
   },
 }
