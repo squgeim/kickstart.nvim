@@ -3,8 +3,7 @@ vim.o.background = 'dark'
 
 vim.defer_fn(function()
   -- vim.cmd.colorscheme 'coffeecat'
-  -- vim.cmd.colorscheme 'tokyonight'
-  -- vim.cmd.colorscheme 'vscode'
+  vim.cmd.colorscheme 'tokyonight-moon'
   -- vim.cmd.colorscheme 'dawnfox'
   -- vim.cmd.colorscheme 'lunaperche'
   -- vim.cmd.colorscheme 'github_light_tritanopia'
@@ -17,6 +16,8 @@ vim.defer_fn(function()
   -- vim.cmd.colorscheme 'solarized'
   -- vim.cmd.colorscheme 'papercolor'
   -- vim.cmd.colorscheme 'OceanicNext'
+  -- vim.cmd.colorscheme 'okcolors-sharp'
+  -- vim.cmd.colorscheme 'monokai_pro'
 end, 0)
 
 return {
@@ -32,6 +33,7 @@ return {
       require('vscode').setup {
         italic_comments = true,
       }
+      -- vim.cmd.colorscheme 'vscode'
     end,
   },
   'dgraham/xcode-low-key-vim',
@@ -41,7 +43,7 @@ return {
     'lalitmee/cobalt2.nvim',
     dependencies = { 'tjdevries/colorbuddy.nvim', tag = 'v1.0.0' },
     init = function()
-      require('colorbuddy').colorscheme 'cobalt2'
+      -- require('colorbuddy').colorscheme 'cobalt2'
     end,
   },
   { 'projekt0n/github-nvim-theme', name = 'github-theme' },
