@@ -9,7 +9,7 @@ require('telescope').setup {
     layout_config = {
       prompt_position = 'top',
     },
-    sorting_strategy='ascending',
+    sorting_strategy = 'ascending',
     path_display = { 'truncate' },
     dynamic_preview_title = true,
   },
@@ -176,6 +176,13 @@ return {
     end,
   },
   'smithbm2316/centerpad.nvim',
+  {
+    'ggandor/leap.nvim',
+    keys = {
+      { 's', '<Plug>(leap-forward-to)' },
+      { 'S', '<Plug>(leap-backward-to)' },
+    },
+  },
   {
     'toppair/peek.nvim',
     event = { 'VeryLazy' },
