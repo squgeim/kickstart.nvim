@@ -10,5 +10,3 @@ end
 
 -- Optionally, map this function to a key for easier access
 vim.keymap.set('n', '<leader>st', find_files_with_current_buffer_name, { desc = 'Find files with current buffer name' })
-
-return {}

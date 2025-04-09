@@ -1,50 +1,25 @@
-vim.o.termguicolors = true
-vim.o.background = 'dark'
-
 vim.defer_fn(function()
-  -- vim.cmd.colorscheme 'coffeecat'
-  vim.cmd.colorscheme 'tokyonight-moon'
-  -- vim.cmd.colorscheme 'dawnfox'
-  -- vim.cmd.colorscheme 'lunaperche'
-  -- vim.cmd.colorscheme 'github_light_tritanopia'
-  -- vim.cmd.colorscheme 'modus'
+  vim.cmd 'colorscheme kanagawa'
+  -- require('colorbuddy').colorscheme 'cobalt2'
   -- vim.cmd.colorscheme 'rose-pine'
-  -- vim.cmd.colorscheme 'adwaita'
-  -- vim.cmd.colorscheme 'sorbet'
-  -- vim.cmd.colorscheme 'iceclimber'
-  -- vim.cmd.colorscheme 'darkforest'
-  -- vim.cmd.colorscheme 'solarized'
-  -- vim.cmd.colorscheme 'papercolor'
-  -- vim.cmd.colorscheme 'OceanicNext'
-  -- vim.cmd.colorscheme 'okcolors-sharp'
-  -- vim.cmd.colorscheme 'monokai_pro'
+  -- vim.cmd.colorscheme 'NeoSolarized'
+  -- vim.cmd.colorscheme 'catppuccin'
 end, 0)
 
 return {
-  'morhetz/gruvbox',
-  'nlknguyen/papercolor-theme',
-  'kristijanhusak/vim-hybrid-material',
-  'humanoid-colors/vim-humanoid-colorscheme',
-  'nordtheme/vim',
-  'EdenEast/nightfox.nvim',
+  'rebelot/kanagawa.nvim',
   {
     'Mofiqul/vscode.nvim',
     config = function()
       require('vscode').setup {
         italic_comments = true,
       }
-      -- vim.cmd.colorscheme 'vscode'
     end,
   },
-  'dgraham/xcode-low-key-vim',
   'sainnhe/sonokai',
-  'miikanissi/modus-themes.nvim',
   {
     'lalitmee/cobalt2.nvim',
     dependencies = { 'tjdevries/colorbuddy.nvim', tag = 'v1.0.0' },
-    init = function()
-      -- require('colorbuddy').colorscheme 'cobalt2'
-    end,
   },
   { 'projekt0n/github-nvim-theme', name = 'github-theme' },
   {
@@ -60,12 +35,9 @@ return {
           transparency = false,
         },
       }
-      -- vim.cmd.colorscheme 'rose-pine'
     end,
   },
   'Mofiqul/adwaita.nvim',
-  'maxmx03/solarized.nvim',
-  'daschw/leaf.nvim',
   'cdmill/neomodern.nvim',
   'e-q/okcolors.nvim',
   {
@@ -85,7 +57,6 @@ return {
           undercurl = true, -- true/false; for global undercurl
         },
       }
-      -- vim.cmd.colorscheme 'NeoSolarized'
     end,
   },
   {
@@ -97,7 +68,6 @@ return {
         transparent_background = false, -- disables setting the background color.
         no_italic = false, -- Force no italic
       }
-      -- vim.cmd.colorscheme 'catppuccin'
     end,
   },
   'tanvirtin/monokai.nvim',

@@ -30,5 +30,3 @@ vim.keymap.set('n', '<Leader>b', function()
     end
   end
 end, { silent = true, desc = 'Close unused buffers' })
-
-return {}
